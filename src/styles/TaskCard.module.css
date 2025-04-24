@@ -1,0 +1,167 @@
+.taskCard {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 25rem;
+  gap: 15px;
+}
+
+.taskCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.taskInformation{
+
+}
+
+.taskHeader {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  gap: 15px;
+}
+
+.taskTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.taskDescription {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.dueDate {
+  font-size: 0.8rem;
+  color: #666;
+  width: 100%;
+  position: relative;
+  display: block;
+  text-align: left;
+}
+
+.priority {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.priorityHigh {
+  background-color: #fee2e2;
+  color: #dc2626;
+}
+
+.priorityMedium {
+  background-color: #fef3c7;
+  color: #d97706;
+}
+
+.priorityLow {
+  background-color: #dcfce7;
+  color: #16a34a;
+}
+
+.taskActions {
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 36px;
+  height: 36px;
+}
+
+.buttonComplete {
+  background-color: white;
+  color: #9ca3af;
+  border-radius: 5px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+button:hover .buttonComplete {
+  border-color: #16a34a;
+  color: #16a34a;
+  background-color: #dcfce7;
+}
+
+.complete .buttonComplete {
+  background-color: #16a34a;
+  border-color: #16a34a;
+  color: white;
+}
+
+.complete button:hover .buttonComplete {
+  background-color: #dcfce7;
+  border-color: #15803d;
+}
+
+.buttonIcon {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+}
+
+.buttonPrimary {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.buttonPrimary:hover {
+  background-color: #2563eb;
+}
+
+.buttonSecondary {
+  background-color: #f3f4f6;
+  color: #4b5563;
+}
+
+.buttonSecondary:hover {
+  background-color: #e5e7eb;
+}
+
+.buttonDanger {
+  background-color: #fee2e2;
+  color: #dc2626;
+}
+
+.buttonDanger:hover {
+  background-color: #fecaca;
+}
+
+.complete {
+  opacity: 0.7;
+  background-color: #f9fafb;
+}
+
+.complete .taskTitle {
+  text-decoration: line-through;
+  color: #666;
+} 
