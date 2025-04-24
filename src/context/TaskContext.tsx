@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer, ReactNode } from 'react';
+import React, { createContext, useContext, useReducer, ReactNode, useEffect } from 'react';
 import { Task, TaskFilters, TaskFormData } from '../types/task';
 import { mockTasks } from '../data/mockTasks';
 
@@ -12,10 +12,17 @@ type TaskAction =
   | { type: 'UPDATE_TASK'; payload: Task }
   | { type: 'DELETE_TASK'; payload: string }
   | { type: 'TOGGLE_STATUS'; payload: string }
-  | { type: 'SET_FILTERS'; payload: Partial<TaskFilters> };
+  | { type: 'SET_FILTERS'; payload: Partial<TaskFilters> }
+  | { type: 'LOAD_TASKS'; payload: Task[] };
+
+// Load tasks from localStorage or use mockTasks if none exist
+const loadSavedTasks = (): Task[] => {
+  const savedTasks = localStorage.getItem('tasks');
+  return savedTasks ? JSON.parse(savedTasks) : mockTasks;
+};
 
 const initialState: TaskState = {
-  tasks: mockTasks,
+  tasks: loadSavedTasks(),
   filters: {
     status: 'all',
     sortBy: 'dueDate',
@@ -24,26 +31,34 @@ const initialState: TaskState = {
 };
 
 const taskReducer = (state: TaskState, action: TaskAction): TaskState => {
+  let newState: TaskState;
+
   switch (action.type) {
     case 'ADD_TASK':
-      return {
+      newState = {
         ...state,
         tasks: [...state.tasks, action.payload]
       };
+      break;
+
     case 'UPDATE_TASK':
-      return {
+      newState = {
         ...state,
         tasks: state.tasks.map(task =>
           task.id === action.payload.id ? action.payload : task
         )
       };
+      break;
+
     case 'DELETE_TASK':
-      return {
+      newState = {
         ...state,
         tasks: state.tasks.filter(task => task.id !== action.payload)
       };
+      break;
+
     case 'TOGGLE_STATUS':
-      return {
+      newState = {
         ...state,
         tasks: state.tasks.map(task =>
           task.id === action.payload
@@ -51,14 +66,29 @@ const taskReducer = (state: TaskState, action: TaskAction): TaskState => {
             : task
         )
       };
+      break;
+
     case 'SET_FILTERS':
-      return {
+      newState = {
         ...state,
         filters: { ...state.filters, ...action.payload }
       };
+      break;
+
+    case 'LOAD_TASKS':
+      newState = {
+        ...state,
+        tasks: action.payload
+      };
+      break;
+
     default:
       return state;
   }
+
+  // Save tasks to localStorage whenever they change
+  localStorage.setItem('tasks', JSON.stringify(newState.tasks));
+  return newState;
 };
 
 interface TaskContextType {
@@ -75,6 +105,12 @@ const TaskContext = createContext<TaskContextType | undefined>(undefined);
 
 export const TaskProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(taskReducer, initialState);
+
+  // Load tasks from localStorage when the component mounts
+  useEffect(() => {
+    const savedTasks = loadSavedTasks();
+    dispatch({ type: 'LOAD_TASKS', payload: savedTasks });
+  }, []);
 
   const addTask = (taskData: TaskFormData) => {
     const newTask: Task = {
@@ -155,4 +191,4 @@ export const useTaskContext = () => {
     throw new Error('useTaskContext must be used within a TaskProvider');
   }
   return context;
-}; 
+};
