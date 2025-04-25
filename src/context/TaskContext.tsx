@@ -15,7 +15,6 @@ type TaskAction =
   | { type: 'SET_FILTERS'; payload: Partial<TaskFilters> }
   | { type: 'LOAD_TASKS'; payload: Task[] };
 
-// Load tasks from localStorage or use mockTasks if none exist
 const loadSavedTasks = (): Task[] => {
   const savedTasks = localStorage.getItem('tasks');
   return savedTasks ? JSON.parse(savedTasks) : mockTasks;
@@ -86,7 +85,6 @@ const taskReducer = (state: TaskState, action: TaskAction): TaskState => {
       return state;
   }
 
-  // Save tasks to localStorage whenever they change
   localStorage.setItem('tasks', JSON.stringify(newState.tasks));
   return newState;
 };
@@ -106,7 +104,6 @@ const TaskContext = createContext<TaskContextType | undefined>(undefined);
 export const TaskProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(taskReducer, initialState);
 
-  // Load tasks from localStorage when the component mounts
   useEffect(() => {
     const savedTasks = loadSavedTasks();
     dispatch({ type: 'LOAD_TASKS', payload: savedTasks });
@@ -141,12 +138,10 @@ export const TaskProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const getFilteredTasks = () => {
     let filteredTasks = [...state.tasks];
 
-    // Apply status filter
     if (state.filters.status !== 'all') {
       filteredTasks = filteredTasks.filter(task => task.status === state.filters.status);
     }
 
-    // Apply search filter
     if (state.filters.searchQuery) {
       const query = state.filters.searchQuery.toLowerCase();
       filteredTasks = filteredTasks.filter(task =>
@@ -155,7 +150,6 @@ export const TaskProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       );
     }
 
-    // Apply sorting
     filteredTasks.sort((a, b) => {
       if (state.filters.sortBy === 'dueDate') {
         return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();

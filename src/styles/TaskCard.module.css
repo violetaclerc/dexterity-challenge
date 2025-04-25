@@ -1,15 +1,13 @@
 .taskCard {
   background: white;
   border-radius: 8px;
-  padding: 1.5rem;
+  padding: 1.25rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s, box-shadow 0.2s;
   border: 1px solid #e0e0e0;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 25rem;
-  gap: 15px;
+  gap: 1rem;
+  margin-bottom: 1rem;
 }
 
 .taskCard:hover {
@@ -17,38 +15,39 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.taskInformation{
-
+.taskInformation {
+  flex: 1;
+  min-width: 0;
 }
 
 .taskHeader {
   display: flex;
-  justify-content: flex-start;
   align-items: flex-start;
-  margin-bottom: 1rem;
-  gap: 15px;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 .taskTitle {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
   color: #1a1a1a;
   margin: 0;
+  flex: 1;
+  line-height: 1.4;
+  text-align: left;
 }
 
 .taskDescription {
   color: #666;
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  margin-bottom: 0.75rem;
   line-height: 1.5;
   text-align: left;
 }
 
 .dueDate {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: #666;
-  width: 100%;
-  position: relative;
   display: block;
   text-align: left;
 }
@@ -56,8 +55,10 @@
 .priority {
   padding: 0.25rem 0.75rem;
   border-radius: 12px;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .priorityHigh {
@@ -77,24 +78,25 @@
 
 .taskActions {
   display: flex;
-  gap: 0.5rem;
   flex-direction: column;
+  gap: 0.5rem;
+  flex-shrink: 0;
 }
 
 .button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
   padding: 0.5rem;
   border: none;
   border-radius: 6px;
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
 }
 
 .buttonComplete {
@@ -124,18 +126,8 @@ button:hover .buttonComplete {
 }
 
 .buttonIcon {
-  flex-shrink: 0;
   width: 16px;
   height: 16px;
-}
-
-.buttonPrimary {
-  background-color: #3b82f6;
-  color: white;
-}
-
-.buttonPrimary:hover {
-  background-color: #2563eb;
 }
 
 .buttonSecondary {
@@ -164,4 +156,43 @@ button:hover .buttonComplete {
 .complete .taskTitle {
   text-decoration: line-through;
   color: #666;
+}
+
+@media (max-width: 640px) {
+  .taskCard {
+    padding: 1rem;
+  }
+
+  .taskHeader {
+    gap: 0.75rem;
+  }
+
+  .taskTitle {
+    font-size: 0.9375rem;
+  }
+
+  .taskDescription {
+    font-size: 0.8125rem;
+  }
+
+  .priority {
+    font-size: 0.6875rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .button {
+    width: 28px;
+    height: 28px;
+  }
+
+  .buttonIcon {
+    width: 14px;
+    height: 14px;
+  }
+  .taskActions {
+    flex-direction: row;
+  }
+  .taskCard{
+    flex-direction: column;
+  }
 } 
