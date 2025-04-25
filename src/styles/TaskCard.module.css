@@ -1,0 +1,198 @@
+.taskCard {
+  background: white;
+  border-radius: 8px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid #e0e0e0;
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.taskCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.taskInformation {
+  flex: 1;
+  min-width: 0;
+}
+
+.taskHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.taskTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+  flex: 1;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.taskDescription {
+  color: #666;
+  font-size: 0.875rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.dueDate {
+  font-size: 0.75rem;
+  color: #666;
+  display: block;
+  text-align: left;
+}
+
+.priority {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.priorityHigh {
+  background-color: #fee2e2;
+  color: #dc2626;
+}
+
+.priorityMedium {
+  background-color: #fef3c7;
+  color: #d97706;
+}
+
+.priorityLow {
+  background-color: #dcfce7;
+  color: #16a34a;
+}
+
+.taskActions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.buttonComplete {
+  background-color: white;
+  color: #9ca3af;
+  border-radius: 5px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+button:hover .buttonComplete {
+  border-color: #16a34a;
+  color: #16a34a;
+  background-color: #dcfce7;
+}
+
+.complete .buttonComplete {
+  background-color: #16a34a;
+  border-color: #16a34a;
+  color: white;
+}
+
+.complete button:hover .buttonComplete {
+  background-color: #dcfce7;
+  border-color: #15803d;
+}
+
+.buttonIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.buttonSecondary {
+  background-color: #f3f4f6;
+  color: #4b5563;
+}
+
+.buttonSecondary:hover {
+  background-color: #e5e7eb;
+}
+
+.buttonDanger {
+  background-color: #fee2e2;
+  color: #dc2626;
+}
+
+.buttonDanger:hover {
+  background-color: #fecaca;
+}
+
+.complete {
+  opacity: 0.7;
+  background-color: #f9fafb;
+}
+
+.complete .taskTitle {
+  text-decoration: line-through;
+  color: #666;
+}
+
+@media (max-width: 640px) {
+  .taskCard {
+    padding: 1rem;
+  }
+
+  .taskHeader {
+    gap: 0.75rem;
+  }
+
+  .taskTitle {
+    font-size: 0.9375rem;
+  }
+
+  .taskDescription {
+    font-size: 0.8125rem;
+  }
+
+  .priority {
+    font-size: 0.6875rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .button {
+    width: 28px;
+    height: 28px;
+  }
+
+  .buttonIcon {
+    width: 14px;
+    height: 14px;
+  }
+  .taskActions {
+    flex-direction: row;
+  }
+  .taskCard{
+    flex-direction: column;
+  }
+} 
