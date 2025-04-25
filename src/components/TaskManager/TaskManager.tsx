@@ -10,6 +10,7 @@ const TaskManager: React.FC = () => {
   const { state, addTask, updateTask, deleteTask, toggleStatus, setFilters, getFilteredTasks } = useTaskContext();
   const [isAddingTask, setIsAddingTask] = useState(false);
   const [editingTask, setEditingTask] = useState<Task | null>(null);
+  const [activeTab, setActiveTab] = useState<'todo' | 'completed'>('todo');
   const [formData, setFormData] = useState<TaskFormData>({
     title: '',
     description: '',
@@ -92,8 +93,23 @@ const TaskManager: React.FC = () => {
         />
       </div>
 
+      <div className={styles.tabs}>
+        <button
+          className={`${styles.tab} ${activeTab === 'todo' ? styles.active : ''}`}
+          onClick={() => setActiveTab('todo')}
+        >
+          To Do ({incompleteTasks.length})
+        </button>
+        <button
+          className={`${styles.tab} ${activeTab === 'completed' ? styles.active : ''}`}
+          onClick={() => setActiveTab('completed')}
+        >
+          Completed ({completedTasks.length})
+        </button>
+      </div>
+
       <div className={styles.columnsContainer}>
-        <div className={styles.column}>
+        <div className={`${styles.column} ${activeTab === 'todo' ? styles.active : ''}`}>
           <h2 className={styles.columnTitle}>
             To Do <span className={styles.taskCount}>{incompleteTasks.length}</span>
           </h2>
@@ -110,7 +126,7 @@ const TaskManager: React.FC = () => {
           </div>
         </div>
 
-        <div className={styles.column}>
+        <div className={`${styles.column} ${activeTab === 'completed' ? styles.active : ''}`}>
           <h2 className={styles.columnTitle}>
             Completed <span className={styles.taskCount}>{completedTasks.length}</span>
           </h2>
@@ -145,4 +161,4 @@ const TaskManager: React.FC = () => {
   );
 };
 
-export default TaskManager; 
+export default TaskManager;

@@ -1,8 +1,9 @@
 #root {
-  max-width: 1280px;
+  width: 80%;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  height: calc(100vh - 4rem);
 }
 
 .logo {
@@ -44,5 +45,6 @@
 @media (max-width: 1024px) {
   #root {
     padding: 1rem;
+    height: calc(100vh - 2rem);
   }
 }
