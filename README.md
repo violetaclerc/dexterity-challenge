@@ -41,8 +41,8 @@ A modern, responsive task management application built with React and TypeScript
 
 1. Clone the repository:
 ```bash
-git clone [repository-url]
-cd [repository-name]
+git clone [dexterity-challenge](https://github.com/violetaclerc/dexterity-challenge.git)
+cd dexterity-challenge
 ```
 
 2. Install dependencies:
